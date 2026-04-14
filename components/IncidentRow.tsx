@@ -22,36 +22,36 @@ const typeIcon: Record<string, string> = {
   patrol: '🚢',
 }
 const damageBadge: Record<string, string> = {
-  none: 'bg-green-100 text-green-700',
-  damaged: 'bg-yellow-100 text-yellow-700',
-  sunk: 'bg-red-100 text-red-700',
-  seized: 'bg-purple-100 text-purple-700',
+  none: 'bg-emerald-500/10 text-emerald-600 ring-emerald-500/20',
+  damaged: 'bg-amber-500/10 text-amber-600 ring-amber-500/20',
+  sunk: 'bg-red-500/10 text-red-600 ring-red-500/20',
+  seized: 'bg-purple-500/10 text-purple-600 ring-purple-500/20',
 }
 
 export default function IncidentRow({ incident }: { incident: Incident }) {
   return (
-    <tr className="border-b border-gray-100 hover:bg-gray-50">
-      <td className="py-2 px-3 text-xs text-gray-500 whitespace-nowrap">{incident.date}</td>
-      <td className="py-2 px-3">
-        <div className="flex items-center gap-1">
-          <span>{typeIcon[incident.vessel_type] || '🚢'}</span>
+    <tr className="border-b border-slate-50 hover:bg-sky-50/50 transition-colors">
+      <td className="py-3 px-4 text-xs text-slate-400 whitespace-nowrap font-medium">{incident.date}</td>
+      <td className="py-3 px-4">
+        <div className="flex items-center gap-2">
+          <span className="text-base">{typeIcon[incident.vessel_type] || '🚢'}</span>
           <div>
-            <div className="text-sm font-medium text-gray-800">{incident.vessel_name}</div>
-            <div className="text-xs text-gray-400">{incident.flag}</div>
+            <div className="text-sm font-semibold text-slate-800">{incident.vessel_name}</div>
+            <div className="text-xs text-slate-400">{incident.flag}</div>
           </div>
         </div>
       </td>
-      <td className="py-2 px-3">
-        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">{incident.attack_type}</span>
+      <td className="py-3 px-4">
+        <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200">{incident.attack_type}</span>
       </td>
-      <td className="py-2 px-3">
-        <span className={`text-xs px-2 py-0.5 rounded font-medium ${damageBadge[incident.damage] || 'bg-gray-100 text-gray-600'}`}>
+      <td className="py-3 px-4">
+        <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ring-1 ring-inset ${damageBadge[incident.damage] || 'bg-slate-500/10 text-slate-600 ring-slate-500/20'}`}>
           {incident.damage}
         </span>
       </td>
-      <td className="py-2 px-3 text-xs text-gray-600 max-w-xs">
-        <p className="line-clamp-1">{incident.description}</p>
-        <a href={incident.source_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">{incident.source}</a>
+      <td className="py-3 px-4 text-xs text-slate-600 max-w-xs">
+        <p className="line-clamp-1 mb-0.5">{incident.description}</p>
+        <a href={incident.source_url} target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-sky-600 font-medium transition-colors">{incident.source}</a>
       </td>
     </tr>
   )

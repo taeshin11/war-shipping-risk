@@ -16,23 +16,29 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-gray-50">
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <Link href="/" className="font-bold text-lg text-gray-900">⚓ War Shipping Risk</Link>
-            <nav className="flex gap-4 text-sm text-gray-600">
-              <Link href="/" className="hover:text-gray-900">Home</Link>
-              <Link href="/routes" className="hover:text-gray-900">Routes</Link>
-              <Link href="/incidents" className="hover:text-gray-900">Incidents</Link>
-              <Link href="/about" className="hover:text-gray-900">About</Link>
+      <body className="min-h-full flex flex-col bg-slate-50">
+        <header className="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-700/50">
+          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inset-0 rounded-full bg-sky-500 opacity-75"></span>
+                <span className="relative rounded-full h-2.5 w-2.5 bg-sky-500"></span>
+              </span>
+              <Link href="/" className="text-lg font-bold tracking-tight">War Shipping Risk</Link>
+            </div>
+            <nav className="flex gap-6 text-sm">
+              <Link href="/" className="text-slate-300 hover:text-white transition-colors">Home</Link>
+              <Link href="/routes" className="text-slate-300 hover:text-white transition-colors">Routes</Link>
+              <Link href="/incidents" className="text-slate-300 hover:text-white transition-colors">Incidents</Link>
+              <Link href="/about" className="text-slate-300 hover:text-white transition-colors">About</Link>
             </nav>
           </div>
           <AdHeader />
         </header>
-        <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6">{children}</main>
-        <footer className="bg-white border-t border-gray-200 py-4 mt-8">
-          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between text-xs text-gray-400">
-            <span>© 2026 War Shipping Risk</span>
+        <main className="flex-1 w-full">{children}</main>
+        <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 mt-16">
+          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <p className="text-sm">© 2025 War Shipping Risk. All rights reserved.</p>
             <VisitorCounter />
           </div>
         </footer>

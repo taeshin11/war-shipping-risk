@@ -13,41 +13,50 @@ interface Route {
   conflict: string
 }
 
-const riskStyles: Record<string, string> = {
-  critical: 'bg-red-50 border-red-200',
-  high: 'bg-orange-50 border-orange-200',
-  elevated: 'bg-yellow-50 border-yellow-200',
-  open: 'bg-green-50 border-green-200',
+const riskRing: Record<string, string> = {
+  critical: 'bg-red-500/10 text-red-600 ring-red-500/20',
+  high: 'bg-orange-500/10 text-orange-600 ring-orange-500/20',
+  elevated: 'bg-amber-500/10 text-amber-600 ring-amber-500/20',
+  open: 'bg-emerald-500/10 text-emerald-600 ring-emerald-500/20',
 }
-const riskBadge: Record<string, string> = {
-  critical: 'bg-red-100 text-red-700',
-  high: 'bg-orange-100 text-orange-700',
-  elevated: 'bg-yellow-100 text-yellow-700',
-  open: 'bg-green-100 text-green-700',
+const riskBar: Record<string, string> = {
+  critical: 'bg-red-500',
+  high: 'bg-orange-500',
+  elevated: 'bg-amber-500',
+  open: 'bg-emerald-500',
 }
 
 export default function RouteCard({ route }: { route: Route }) {
   return (
-    <div className={`border rounded-lg p-4 hover:shadow-md transition-shadow ${riskStyles[route.risk_level] || 'bg-gray-50 border-gray-200'}`}>
-      <div className="flex items-start justify-between gap-2 mb-2">
-        <h3 className="font-semibold text-gray-900">{route.name}</h3>
-        <span className={`text-xs px-2 py-0.5 rounded-full font-bold uppercase whitespace-nowrap ${riskBadge[route.risk_level]}`}>
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-5 group">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <h3 className="font-semibold text-slate-900">{route.name}</h3>
+        <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ring-1 ring-inset uppercase whitespace-nowrap ${riskRing[route.risk_level] || 'bg-slate-500/10 text-slate-600 ring-slate-500/20'}`}>
           {route.risk_level}
         </span>
       </div>
-      <div className="flex items-center gap-2 mb-2">
-        <div className="text-lg font-bold text-gray-800">{route.risk_score}/10</div>
-        <div className="flex-1 bg-gray-200 rounded-full h-2">
-          <div className="bg-red-500 h-2 rounded-full" style={{ width: `${route.risk_score * 10}%` }} />
+      <div className="flex items-center gap-3 mb-3">
+        <div className="text-lg font-bold text-slate-800">{route.risk_score}/10</div>
+        <div className="flex-1 bg-slate-100 rounded-full h-2">
+          <div className={`h-2 rounded-full transition-all ${riskBar[route.risk_level] || 'bg-slate-400'}`} style={{ width: `${route.risk_score * 10}%` }} />
         </div>
       </div>
-      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{route.description}</p>
-      <div className="grid grid-cols-3 gap-2 text-xs text-gray-500 mb-3">
-        <div className="text-center"><div className="font-bold text-gray-800 text-sm">{route.vessels_attacked}</div><div>Attacked</div></div>
-        <div className="text-center"><div className="font-bold text-gray-800 text-sm">{route.daily_ships_affected}</div><div>Ships/day</div></div>
-        <div className="text-center"><div className="font-bold text-gray-800 text-sm">+{route.freight_impact_pct}%</div><div>Freight</div></div>
+      <p className="text-sm text-slate-600 mb-4 line-clamp-2">{route.description}</p>
+      <div className="grid grid-cols-3 gap-2 text-xs mb-4">
+        <div className="text-center bg-slate-50 rounded-xl p-2">
+          <div className="font-bold text-slate-800 text-sm">{route.vessels_attacked}</div>
+          <div className="text-slate-400 mt-0.5">Attacked</div>
+        </div>
+        <div className="text-center bg-slate-50 rounded-xl p-2">
+          <div className="font-bold text-slate-800 text-sm">{route.daily_ships_affected}</div>
+          <div className="text-slate-400 mt-0.5">Ships/day</div>
+        </div>
+        <div className="text-center bg-slate-50 rounded-xl p-2">
+          <div className="font-bold text-slate-800 text-sm">+{route.freight_impact_pct}%</div>
+          <div className="text-slate-400 mt-0.5">Freight</div>
+        </div>
       </div>
-      <Link href={`/routes/${route.slug}`} className="text-xs text-blue-600 hover:underline">View details →</Link>
+      <Link href={`/routes/${route.slug}`} className="text-xs text-sky-600 hover:text-sky-700 font-semibold transition-colors">View details →</Link>
     </div>
   )
 }
