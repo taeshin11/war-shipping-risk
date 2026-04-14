@@ -5,7 +5,7 @@ import RouteCard from '@/components/RouteCard'
 
 type SortKey = 'risk_score' | 'vessels_attacked' | 'freight_impact_pct'
 
-export default function RoutesPage() {
+export default function RoutesClient() {
   const [sort, setSort] = useState<SortKey>('risk_score')
   const sorted = [...routesData].sort((a, b) => (b[sort] as number) - (a[sort] as number))
 

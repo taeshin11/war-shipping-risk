@@ -1,3 +1,4 @@
+import { setRequestLocale } from 'next-intl/server'
 import incidents from '@/public/data/incidents.json'
 import IncidentRow from '@/components/IncidentRow'
 
@@ -5,7 +6,10 @@ export const metadata = {
   title: 'All Maritime Incidents | War Shipping Risk',
 }
 
-export default function IncidentsPage() {
+export default async function IncidentsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const sorted = [...incidents].sort((a, b) => b.date.localeCompare(a.date))
 
   return (

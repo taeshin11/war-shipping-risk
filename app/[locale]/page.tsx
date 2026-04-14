@@ -1,4 +1,10 @@
 import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
+import routes from '@/public/data/routes.json'
+import incidents from '@/public/data/incidents.json'
+import RouteCard from '@/components/RouteCard'
+import IncidentRow from '@/components/IncidentRow'
+import ShippingMapWrapper from '@/components/ShippingMapWrapper'
 
 export const metadata: Metadata = {
   title: 'War Shipping Risk | Real-Time Conflict Intelligence',
@@ -6,13 +12,10 @@ export const metadata: Metadata = {
   keywords: 'war shipping risk, maritime security, naval threats, shipping lane disruption, sea conflict, piracy',
 }
 
-import routes from '@/public/data/routes.json'
-import incidents from '@/public/data/incidents.json'
-import RouteCard from '@/components/RouteCard'
-import IncidentRow from '@/components/IncidentRow'
-import ShippingMapWrapper from '@/components/ShippingMapWrapper'
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
 
-export default function Home() {
   const sorted = [...routes].sort((a, b) => b.risk_score - a.risk_score)
   const recent = [...incidents].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8)
 

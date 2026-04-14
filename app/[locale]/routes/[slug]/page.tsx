@@ -3,9 +3,11 @@ import incidents from '@/public/data/incidents.json'
 import IncidentRow from '@/components/IncidentRow'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { setRequestLocale } from 'next-intl/server'
 
 export async function generateStaticParams() {
-  return routes.map(r => ({ slug: r.slug }))
+  const locales = ['en', 'ko', 'ja', 'zh', 'es', 'fr', 'de', 'pt']
+  return locales.flatMap(locale => routes.map(r => ({ locale, slug: r.slug })))
 }
 
 const riskBadge: Record<string, string> = {
@@ -15,8 +17,10 @@ const riskBadge: Record<string, string> = {
   open: 'bg-green-100 text-green-700',
 }
 
-export default async function RouteDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+export default async function RouteDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
+
   const route = routes.find(r => r.slug === slug)
   if (!route) notFound()
 
@@ -24,7 +28,7 @@ export default async function RouteDetailPage({ params }: { params: Promise<{ sl
 
   return (
     <div className="max-w-4xl">
-      <Link href="/routes" className="text-sm text-blue-600 hover:underline mb-4 block">← Back to routes</Link>
+      <Link href={`/${locale}/routes`} className="text-sm text-blue-600 hover:underline mb-4 block">← Back to routes</Link>
       <div className="flex items-center gap-3 mb-2">
         <h1 className="text-2xl font-bold text-gray-900">{route.name}</h1>
         <span className={`text-sm px-3 py-1 rounded-full font-bold uppercase ${riskBadge[route.risk_level]}`}>{route.risk_level}</span>
