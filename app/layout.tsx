@@ -9,9 +9,30 @@ import AdMobileSticky from "@/components/ads/AdMobileSticky";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "War Shipping Risk — Maritime Conflict Risk Dashboard",
-  description: "Track maritime conflict zones, sea route risks, and shipping incidents worldwide.",
-};
+  title: {
+    default: 'War Shipping Risk | Real-Time Intelligence',
+    template: '%s | War Shipping Risk'
+  },
+  description: 'Real-time maritime security risks, shipping lane threats, and naval incident tracking in conflict-affected waters',
+  keywords: 'war shipping risk, maritime security, naval threats, shipping lane disruption, sea conflict, piracy',
+  openGraph: {
+    type: 'website',
+    siteName: 'War Shipping Risk',
+    title: 'War Shipping Risk | Real-Time Intelligence',
+    description: 'Real-time maritime security risks, shipping lane threats, and naval incident tracking in conflict-affected waters',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'War Shipping Risk',
+    description: 'Real-time maritime security risks, shipping lane threats, and naval incident tracking in conflict-affected waters',
+  },
+  verification: {
+    google: 'add-your-google-site-verification-here',
+  },
+  other: {
+    'google-adsense-account': 'ca-pub-add-your-publisher-id-here',
+  },
+}
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -37,9 +58,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </header>
         <main className="flex-1 w-full">{children}</main>
         <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 mt-16">
-          <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-            <p className="text-sm">© 2025 War Shipping Risk. All rights reserved.</p>
-            <VisitorCounter />
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm border-t border-slate-700 pt-6 mb-4 mt-4">
+              <a href="/about" className="hover:text-white transition-colors">About Us</a>
+              <a href="/faq" className="hover:text-white transition-colors">How to Use &amp; FAQ</a>
+              <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-sm">© 2025 War Shipping Risk. All rights reserved.</p>
+              <VisitorCounter />
+            </div>
           </div>
         </footer>
         <AdMobileSticky />

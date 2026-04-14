@@ -1,3 +1,11 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'War Shipping Risk | Real-Time Conflict Intelligence',
+  description: 'Real-time maritime security risks, shipping lane threats, and naval incident tracking in conflict-affected waters',
+  keywords: 'war shipping risk, maritime security, naval threats, shipping lane disruption, sea conflict, piracy',
+}
+
 import routes from '@/public/data/routes.json'
 import incidents from '@/public/data/incidents.json'
 import RouteCard from '@/components/RouteCard'
